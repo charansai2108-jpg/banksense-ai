@@ -1,13 +1,14 @@
 ---
-title: BankSense AI
-emoji: 🏦
+title: Banksense Ai
+emoji: 😻
 colorFrom: blue
 colorTo: green
-sdk: streamlit
-sdk_version: 1.28.0
+sdk: gradio
+sdk_version: 6.20.0
+python_version: '3.12'
 app_file: app.py
 pinned: false
+license: mit
 ---
 
-# BankSense AI 🏦
-Smart Bank Statement Analyser powered by LLaMA 3.3 70B
+Check out the configuration reference at https://huggingface.co/docs/hub/spaces-config-reference
