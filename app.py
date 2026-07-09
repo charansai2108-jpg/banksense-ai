@@ -58,11 +58,10 @@ if uploaded_file is not None:
                 category_totals = df.groupby("category")["amount"].sum().reset_index()
                 category_sorted = category_totals.sort_values("amount", ascending=False)
 
-                # Save to session state
                 st.session_state.transactions_df = df
                 st.session_state.total_pages = total_pages
                 st.session_state.category_sorted = category_sorted
-                st.session_state.insights = None  # reset insights
+                st.session_state.insights = None
             else:
                 st.error("❌ Could not extract transactions. Please try again.")
 
@@ -78,12 +77,10 @@ if st.session_state.transactions_df is not None:
     st.success(f"✅ Found {len(df)} transactions across {st.session_state.total_pages} pages!")
     st.markdown("---")
 
-    # Transactions table
     st.markdown("### 📊 Your Transactions")
     st.dataframe(df, use_container_width=True)
     st.markdown("---")
 
-    # Pie chart
     st.markdown("### 🥧 Spending by Category")
     fig = px.pie(
         category_sorted,
@@ -95,7 +92,6 @@ if st.session_state.transactions_df is not None:
     st.plotly_chart(fig, use_container_width=True)
     st.markdown("---")
 
-    # Bar chart
     st.markdown("### 📊 Spending by Category (Bar Chart)")
     fig2 = px.bar(
         category_sorted,
@@ -108,7 +104,6 @@ if st.session_state.transactions_df is not None:
     st.plotly_chart(fig2, use_container_width=True)
     st.markdown("---")
 
-    # Category summary
     st.markdown("### 💰 Category Summary")
     col1, col2 = st.columns(2)
     for idx, (_, row) in enumerate(category_sorted.iterrows()):
@@ -124,12 +119,10 @@ if st.session_state.transactions_df is not None:
             )
     st.markdown("---")
 
-    # Total spending
     st.markdown("### 🧾 Total Spending")
     st.metric(label="Total Amount Spent", value=f"₹{total:,.2f}")
     st.markdown("---")
 
-    # AI Insights
     st.markdown("### 💡 AI Money Saving Insights")
     if st.button("🧠 Generate My Personalised Tips"):
         with st.spinner("AI is analysing your spending habits... ⏳"):
